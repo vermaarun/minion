@@ -1,0 +1,168 @@
+{% extends "nav.html" %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+{% endblock %}
+
+
+{% block bot-content %}
+    <div class="row">
+        <div class="col-sm-2">
+            <img src="{% static 'img/hrbot.png' %}" width="130"
+            height="160" class="mt-5 ml-4">
+        </div>
+        <div class="col-sm-10 jumbotron"
+             style="background-color:transparent;">
+            <h2 class="jumbotron-heading text-xs-center">
+                Hi, HR Bot here!</h2>
+            <p class="lead text-xs-center" style="font-size:16px;
+            color:#02284F">
+            You can ask me simple questions about Pramati Technologies,
+            about internal processes or just type a few keywords.
+            For example: <strong>Tell me about Pramati Technologies.</strong>
+            <br/><br/>
+            I'm only a bot, but I'll do my best to answer! If I don't
+            understand, I will try to respond you according to the previous
+            conversation we had.
+            </p><hr>
+        </div>
+    </div>
+    <div class="row" style="margin-top:-40px; margin-bottom:45px;">
+        <div class="col-xs-6 col-sm-12">
+            <ul class="list-group js-chat-log" style="color:#02284F">
+                <!--<li class="list-group-item">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-sm-1">-->
+                            <!--<img src="{% static 'img/user.jpg' %}"-->
+                            <!--width="35" height="30" class="rounded mt-1">-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-11" style="margin-left:-40px">-->
+                            <!--<strong>Me:</strong><br/>-->
+                            <!--Hello-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="list-group-item">-->
+                    <!--<div class="row">-->
+                        <!--<div class="col-sm-1">-->
+                            <!--<img src="{% static 'img/hrbot.png' %}"-->
+                            <!--width="35" height="30" class="rounded mt-1">-->
+                        <!--</div>-->
+                        <!--<div class="col-sm-11" style="margin-left:-40px">-->
+                            <!--<strong>HR Bot:</strong><br/>-->
+                            <!--Hello. How are you?-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</li>-->
+                <!--<li class="list-group-item">I'm good. How are you?</li>-->
+                <!--<li class="list-group-item">Fine. Tell me how can I assist-->
+                <!--you?</li>-->
+                <!--<li class="list-group-item">Tell me about Pramati-->
+                    <!--Technologies</li>-->
+            </ul>
+        </div>
+    </div>
+{% endblock %}
+
+{% block bot-chat %}
+
+    <div class="col-sm-11 input-group input-group-lg">
+        <input type="text" class="form-control js-text
+            border border-primary"
+               placeholder="# Say 'hello' to me"/>
+            <!--<span class="input-group-btn">-->
+                <!--<button class="btn btn-primary js-say">Submit</button>-->
+            <!--</span>-->
+    </div>
+
+{% endblock %}
+
+{% block extrascript %}
+    <script src="{% static 'js/js.cookie.js' %}"></script>
+    <script>
+        var chatterbotUrl = '{% url "chatterbot:chatterbot" %}';
+        var csrftoken = Cookies.get('csrftoken');
+
+        function csrfSafeMethod(method) {
+            // these HTTP methods do not require CSRF protection
+            return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+        }
+
+        $.ajaxSetup({
+            beforeSend: function(xhr, settings) {
+                if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+                    xhr.setRequestHeader("X-CSRFToken", csrftoken);
+                }
+            }
+        });
+
+        var $chatlog = $('.js-chat-log');
+        var $input = $('.js-text');
+        var $sayButton = $('.js-say');
+
+        function createRow(text, flag) {
+            if(flag == 1){
+                var chat_div = '<li class="list-group-item">\
+                    <div class="row"><div class="col-sm-1">\
+                    <img src="/static/img/user.jpg" width="30" height="30" \
+                    class="rounded mt-1"> </div>\
+                    <div class="col-sm-11" style="margin-left:-40px">\
+                    <strong>Me:</strong><br/>'+text+'</div></div></li>'
+            }
+            else {
+                var chat_div = '<li class="list-group-item">\
+                    <div class="row"><div class="col-sm-1">\
+                    <img src="/static/img/hrbot.png" width="30" height="30" \
+                    class="rounded mt-1"> </div>\
+                    <div class="col-sm-11" style="margin-left:-40px">\
+                    <strong>HR Bot:</strong><br/>'+text+'</div></div></li>'
+            }
+            $chatlog.append(chat_div);
+        }
+
+        function submitInput() {
+            var inputData = {
+                'text': $input.val()
+            }
+
+            // Display the user's input on the web page
+            createRow(inputData.text, 1);
+
+            var $submit = $.ajax({
+                type: 'POST',
+                url: chatterbotUrl,
+                data: JSON.stringify(inputData),
+                contentType: 'application/json'
+            });
+
+            $submit.done(function(statement) {
+                createRow(statement.text, 2);
+
+                // Clear the input field
+                $input.val('');
+
+                // Scroll to the bottom of the chat interface
+                <!--$chatlog[0].scrollTop = $chatlog[0].scrollHeight;-->
+                $("html, body").animate(
+                    { scrollTop: $(document).height() }, 1000
+                );
+            });
+
+            $submit.fail(function() {
+                // TODO: Handle errors
+            });
+        }
+
+        $sayButton.click(function() {
+            submitInput();
+        });
+
+        $input.keydown(function(event) {
+            // Submit the input when the enter button is pressed
+            if (event.keyCode == 13) {
+                submitInput();
+            }
+        });
+    </script>
+{% endblock %}
