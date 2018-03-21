@@ -39,7 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'chatterbot.ext.django_chatterbot',
-    # 'rest_framework',
+    'rest_framework',
     'hrbot',
 ]
 
@@ -48,6 +48,7 @@ INSTALLED_APPS = [
 CHATTERBOT = {
     'name': 'HR Bot',
     'logic_adapters': [
+        'hrbot.logic_adaptors.TicketAdaptor',
         'hrbot.logic_adaptors.DynamicAdaptor',
         'chatterbot.logic.BestMatch',
     ],
@@ -91,21 +92,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'bot.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/2.0/ref/settings/#databases
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.mysql',
-#         # 'ENGINE': 'django_mongodb_engine',
-#         'NAME': 'hrbot',
-#         'USER': 'root',
-#         'PASSWORD': 'pramati123',
-#         'HOST': '127.0.0.1',
-#         'PORT': '3306',
-#         # 'NAME': 'my_database',
-#     }
-# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',

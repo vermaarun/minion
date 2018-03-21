@@ -64,3 +64,6 @@ conversations:
   - Please enter employee id.
 - - Search employee.
   - Please enter employee id.
+- - I would like to create a new Ticket.
+  - Please select type of ticket you want to create 1) Default 2) Incident
+    3) Problem 4) Request for Change

@@ -182,5 +182,4 @@ class DynamicAdaptor(LogicAdapter):
                 response.text = "I am sorry! I don't understand. " \
                                 "Please try out some other keywords."
                 response.confidence = 0.9
-        print(response.text)
         return response

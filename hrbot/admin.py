@@ -3,7 +3,7 @@ with django admin.
 """
 
 from django.contrib import admin
-from .models import Employee, Leave, EmployeeProfile
+from .models import Employee, Leave, EmployeeProfile, Ticket
 
 
 class EmployeeAdmin(admin.ModelAdmin):
@@ -51,3 +51,4 @@ class EmployeeProfileAdmin(admin.ModelAdmin):
 admin.site.register(Employee, EmployeeAdmin)
 admin.site.register(Leave, LeaveAdmin)
 admin.site.register(EmployeeProfile, EmployeeProfileAdmin)
+admin.site.register(Ticket)

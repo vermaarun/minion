@@ -2,9 +2,10 @@
 
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
-# from rest_framework import generics
-# from .serializers import LeaveDataSerializer
-# from .models import LeaveData
+from rest_framework import viewsets
+
+from .serializers import TicketSerializer
+from .models import Ticket
 
 
 class ChatterBotAppView(LoginRequiredMixin, TemplateView):
@@ -14,13 +15,7 @@ class ChatterBotAppView(LoginRequiredMixin, TemplateView):
     template_name = "app.html"
 
 
-# class CreateView(generics.ListCreateAPIView):
-#     """The class defines the create behaviour of leave api."""
-#
-#     queryset = LeaveData.objects.all()
-#     serializer_class = LeaveDataSerializer
-#
-#     def perform_create(self, serializer):
-#         """Save data when creating new leave entry."""
-#
-#         serializer.save()
+class TicketView(LoginRequiredMixin, viewsets.ModelViewSet):
+    """Class for Ticket APIs."""
+    queryset = Ticket.objects.all()
+    serializer_class = TicketSerializer

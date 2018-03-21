@@ -112,3 +112,40 @@ class EmployeeProfile(models.Model):
         if not self.updated_time:
             self.updated_time = datetime.now()
         super(EmployeeProfile, self).save(*args, **kwargs)
+
+
+class Ticket(models.Model):
+    """ Ticket model to create object for every ticket raised by employees. """
+
+    type_choice = (
+        ('DEFAULT', 'Default'),
+        ('INCIDENT', 'Incident'),
+        ('PROBLEM', 'Problem'),
+        ('Request for Change', 'Request For Change')
+    )
+    to_choice = (
+        ('IT', 'IT support'),
+        ('HR', 'HR support'),
+        ('FACILITY', 'Facility support'),
+        ('APP', 'App support'),
+        ('FINANCE', 'Finance support')
+    )
+    priority_choice = (
+        ('LOW', 'Low'),
+        ('NORMAL', 'Normal'),
+        ('MEDIUM', 'Medium'),
+        ('HIGH', 'High'),
+        ('VERY HIGH', 'Very High')
+    )
+
+    emp = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
+    type = models.CharField(max_length=10, choices=type_choice)
+    to = models.CharField(max_length=10, choices=to_choice)
+    subject = models.CharField(max_length=100)
+    description = models.TextField(max_length=100)
+    priority = models.CharField(max_length=10, choices=priority_choice)
+
+    def __str__(self):
+        """ Method to print Ticket object. """
+        return self.subject
+

@@ -5,6 +5,7 @@ ChatterBot==0.8.1
 chatterbot-corpus==1.1.1
 dateparser==0.6.0
 Django==2.0
+djangorestframework==3.7.7
 djangotoolbox==1.8.0
 future==0.16.0
 idna==2.6
@@ -33,4 +34,3 @@ tzlocal==1.5.1
 urllib3==1.22
 websocket-client==0.44.0
 wrapt==1.10.11
-
