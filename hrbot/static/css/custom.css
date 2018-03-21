@@ -1,0 +1,25 @@
+/* Alternate the background color of the output rows */
+/*.list-group-item:nth-child(even) {
+    background-color: transparent;
+}*/
+.list-group-item {
+    border: 0px;
+    background-color:transparent;
+}
+.chat-log {
+    max-height:200px;
+    overflow-y:scroll;
+}
+hr {
+    display: block;
+    height: 1px;
+    border: 0;
+    border-top: 3px dotted #ccc;
+    margin: 1em 0;
+    padding: 0;
+}
+.no-transition {
+    -webkit-transform: unset !important;
+    transform: none !important;
+    top: 150px !important;
+}
