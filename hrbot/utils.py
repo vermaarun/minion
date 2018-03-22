@@ -134,10 +134,11 @@ def createTicket(statement):
         if statement.upper() in TICKET_TYPE:
             TICKET_DATA['type'] = statement
         else:
-            return "Please select a valid type from the give options"
+            return "Please select a valid type from the give options."
         response = """
         Ticket needs to be sent to: 1) IT support, 2) HR support, 
-        3) Facility support, 4) App support, 5) Finance support
+        3) Facility support, 4) App support, 5) Finance support or 'cancel' 
+        to exit the operation.
         """
         return response
 
@@ -157,7 +158,8 @@ def createTicket(statement):
     if ticket_description is None:
         TICKET_DATA['description'] = statement
         response = "Please select priority of the Ticket 1) Low, 2) Normal, " \
-                   "3) Medium, 4) High, 5) Very High"
+                   "3) Medium, 4) High, 5) Very High or 'cancel' " \
+                   "to exit the operation."
         return response
 
     if ticket_priority is None:

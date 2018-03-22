@@ -65,11 +65,17 @@ class TicketAdaptor(LogicAdapter):
                 else:
                     status = []
 
+            if statement.text.upper() == 'CANCEL' and ticket_flag:
+                ticket_flag = False
+                response.confidence = 1
+                response.text = 'Operation aborted !'
+                return response
+
             if status and not ticket_flag:
                 response.confidence = 1
                 result = "Please select type of ticket you want to create " \
                          "1) Default 2) Incident 3) Problem 4) Request for" \
-                         " Change"
+                         " Change or 'cancel' to exit the operation."
                 ticket_flag = True
             else:
                 if ticket_flag:
