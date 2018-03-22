@@ -134,7 +134,7 @@ def createTicket(statement):
         if statement.upper() in TICKET_TYPE:
             TICKET_DATA['type'] = statement
         else:
-            return "Please select a valid type from the give options."
+            return "Please select a valid type from the given options."
         response = """
         Ticket needs to be sent to: 1) IT support, 2) HR support, 
         3) Facility support, 4) App support, 5) Finance support or 'cancel' 

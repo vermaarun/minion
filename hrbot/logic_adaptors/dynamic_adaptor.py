@@ -10,6 +10,8 @@ from ..global_variables import EMP_ID
 from ..utils import apply_leave
 
 SEARCH_FLAG = False
+
+
 class DynamicAdaptor(LogicAdapter):
     """The DynamicAdaptor logic adaptor parses input to
     extract the keywords related to employee's information.
@@ -145,6 +147,6 @@ class DynamicAdaptor(LogicAdapter):
                 response.confidence = 1
             else:
                 response.text = "I am sorry! I don't understand. " \
-                                "Please try out some other keywords."
+                                "Please refer FAQs from sidebar."
                 response.confidence = 0.9
         return response

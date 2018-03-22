@@ -90,6 +90,6 @@ class TicketAdaptor(LogicAdapter):
             response.text = result
         else:
             response.text = "I'm sorry! I don't understand. " \
-                            "Please try out some other keywords."
+                            "Please refer FAQs from sidebar."
             response.confidence = 0.9
         return response
