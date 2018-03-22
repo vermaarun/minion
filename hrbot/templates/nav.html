@@ -1,31 +1,6 @@
 {% extends "base.html" %}
 {% load staticfiles %}
 
-<!--<nav class="navbar navbar-dark bg-inverse navbar-full bg-primary  ">-->
-
-  <!--<a class="navbar-brand" href="{% url 'main' %}">-->
-    <!--<img src="{% static 'img/pramati.png' %}" width="80" height="50" class="d-inline-block align-top" alt="ChatterBot">-->
-    <!--HR Bot-->
-  <!--</a>-->
-
-  <!--<ul class="nav navbar-nav">-->
-    <!--<li class="nav-item">-->
-      <!--<a class="nav-link" href="http://chatterbot.readthedocs.io/en/stable/">Documentation</a>-->
-    <!--</li>-->
-    <!--<li class="nav-item">-->
-      <!--<a class="nav-link" href="https://github.com/gunthercox/ChatterBot">GitHub</a>-->
-    <!--</li>-->
-  <!--</ul>-->
-
-  <!--<ul class="nav navbar-nav float-xs-right">-->
-    <!--<li class="nav-item">-->
-      <!--<a class="nav-link" href="{% url 'chatterbot:chatterbot' %}">API</a>-->
-    <!--</li>-->
-    <!--<li class="nav-item">-->
-      <!--<a class="nav-link" href="{% url 'admin:index' %}">Admin</a>-->
-    <!--</li>-->
-  <!--</ul>-->
-<!--</nav>-->
 {% block navbar %}
 <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-secondary"
      style="background:rgba(0,0,0,.15)">
@@ -73,19 +48,6 @@
                 </li>
             </ol>
         </nav>
-        <!--<div class="dropdown pt-3 mt-5 ml-3">-->
-            <!--<button class="btn btn-primary dropdown-toggle" type="button"-->
-                    <!--id="dropdownMenuButton" data-toggle="dropdown"-->
-                    <!--aria-haspopup="true" aria-expanded="false">-->
-                <!--Dropdown button-->
-            <!--</button>-->
-            <!--<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">-->
-                <!--<a class="dropdown-item" href="#">Action</a>-->
-                <!--<a class="dropdown-item" href="#">Another action</a>-->
-                <!--<a class="dropdown-item" href="#">Something else here</a>-->
-            <!--</div>-->
-        <!--</div>-->
-        <!--<br/>-->
 
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
@@ -95,7 +57,7 @@
                        aria-expanded="false" id="menu-side">Bots</a>
                     <div class="dropdown-menu no-transition"
                          aria-labelledby="menu-side">
-                        <a class="dropdown-item" href="#">HR Bot</a>
+                        <a class="dropdown-item" href="{% url 'main' %}">Minion</a>
                         <a class="dropdown-item" href="#">Snack Bot</a>
                         <a class="dropdown-item" href="#">Meeting Bot</a>
                         <a class="dropdown-item" href="#">Event Bot</a>
@@ -104,11 +66,6 @@
             </ol>
         </nav>
 
-        <!--<nav aria-label="breadcrumb" role="navigation">-->
-            <!--<ol class="breadcrumb">-->
-                <!--<li class="breadcrumb-item"><a href="#">Bots</a></li>-->
-            <!--</ol>-->
-        <!--</nav>-->
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a href="#">Chat History</a></li>

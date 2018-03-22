@@ -1,31 +1,52 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Minion Frequently Asked Questions</title>
-</head>
-<body>
-<h1><span style="font-weight: 400;">MINION - FAQs</span></h1>
-<h2><span style="font-weight: 400;">What does the bot do?</span></h2>
-<p><span style="font-weight: 400;">Minion is trained to handle day-to-day HR related task like</span></p>
-<ul>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Raising ticket</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Managing leaves</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">Searching for Pramati employee details</span></li>
-</ul>
-<h2><span style="font-weight: 400;">How can I raise a ticket?</span></h2>
-<p><span style="font-weight: 400;">You simply need to tell Minion to 'Raise a ticket' and it will guide you through the process.</span></p>
-<h2><span style="font-weight: 400;">What all leave related tasks can I do?</span></h2>
-<p><span style="font-weight: 400;">The following operations are possible on Minion</span></p>
-<ul>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You could ask for the number of leaves you have left</span></li>
-<li style="font-weight: 400;"><span style="font-weight: 400;">You could also request for a leave.</span></li>
-</ul>
-<h2><span style="font-weight: 400;">How can I create a leave request from the bot?</span></h2>
-<p><span style="font-weight: 400;">Tell Minion that "Apply for leave" and he would ask you for the relevant information and apply the leave on your behalf.</span></p>
-<h2><span style="font-weight: 400;">How can I search for an employee?</span></h2>
-<p><span style="font-weight: 400;">Ask Minion to "Search for an employee" and he will ask you the name of the employee you want to search for.</span></p>
-<h2><span style="font-weight: 400;">What details can I search for an employee?</span></h2>
-<p><span style="font-weight: 400;">You can search for an employee based on their name. Once the search is successful, Minion will return their Name, Employee ID, Mobile Number and Email ID, Designation.</span><br /><br /></p>
-</body>
-</html>
+{% extends "nav.html" %}
+{% load staticfiles %}
+
+{% block extrastyle %}
+    <link rel="stylesheet" href="{% static 'css/custom.css' %}"/>
+{% endblock %}
+
+{% block bot-content %}
+    <div class="row">
+        <div class="card border-dark mb-3">
+            <h3 class="card-header bg-light">Minion - FAQs</h3>
+            <div class="card-body">
+                <h5>Q - What does the bot do?</h5>
+                <p>
+                    A - Minion is trained to handle day-to-day HR related
+                    tasks such as:</p>
+                <ul>
+                    <li>Raising a ticket.</li>
+                    <li>Managing leaves.</li>
+                    <li>Searching for Pramati's employee details.</li>
+                </ul>
+                <h5>Q - How can I raise a ticket?</h5>
+                <p>A - You simply need to tell Minion to <strong>"Raise a
+                    ticket"</strong> and
+                    it will guide you through the process.
+                </p>
+                <h5>Q - What all leave related tasks I can do?</h5>
+                <p>A - The following leave related tasks are possible through
+                    Minion</p>
+                <ul>
+                    <li>You can apply for a leave.</li>
+                    <li>You can ask for the number of remaining leaves you have.</li>
+                    <li>You can ask yet accrue leaves.</li>
+                </ul>
+                <h5>Q - How to create a leave request through minion?</h5>
+                <p>A - Tell Minion to <strong>"Apply for leave"</strong> and it will
+                    ask you the relevant information and apply leave on
+                    your behalf.</p>
+                <h5>Q - How can I search for an employee?</h5>
+                <p>A - Ask Minion to <strong>"Search for an
+                    employee"</strong> and it will ask you the name of the
+                    employee you want to search for.</p>
+                <h5>Q - What all employee details I can search?</h5>
+                <p>A - You can search an employee on the basis of name. If
+                    Minion finds the employee, it will give you the details
+                    containing Name, <br/>Employee ID, Mobile Number, Email ID
+                    and Designation.</p>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
