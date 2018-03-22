@@ -25,7 +25,8 @@ class TicketAdaptor(LogicAdapter):
         # Keywords that user can input
         self.module_keywords = {
             'Ticket': [
-                'ticket', 'create a ticket', 'raise ticket'
+                'ticket', 'create a ticket', 'raise ticket',
+                'issue'
             ]
         }
 
@@ -84,8 +85,10 @@ class TicketAdaptor(LogicAdapter):
                     status = []
 
             if status and not ticket_flag:
-                response.confidence = 0
-                result = statement.text
+                response.confidence = 1
+                result = "Please select type of ticket you want to create " \
+                         "1) Default 2) Incident 3) Problem 4) Request for" \
+                         " Change"
                 ticket_flag = True
             else:
                 if ticket_flag:

@@ -69,10 +69,11 @@ class LeaveData(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     leave_type = models.CharField(default='paid time off', max_length=100)
-    duration = models.DecimalField(default=0.0, max_digits=3,
-                                   decimal_places=1)
-    valid_days = models.DecimalField(default=0.0, decimal_places=1,
-                                     max_digits=3)
+    duration = models.IntegerField(default=0)
+    # duration = models.DecimalField(default=0.0, max_digits=3,
+    #                                decimal_places=1)
+    # valid_days = models.DecimalField(default=0.0, decimal_places=1,
+    #                                  max_digits=3)
     leave_status = models.CharField(default='pending', max_length=100)
     creation_time = models.DateTimeField()
     updated_time = models.DateTimeField()

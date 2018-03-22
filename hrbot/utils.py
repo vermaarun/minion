@@ -167,7 +167,6 @@ def createTicket(statement):
         response = "Please select priority of the Ticket 1) Low, 2) Normal, " \
                    "3) Medium, 4) High, 5) Very High"
         return response
-    import pdb; pdb.set_trace()
 
     if ticket_priority is None:
         if statement.upper() in TICKET_PRIORITY:
