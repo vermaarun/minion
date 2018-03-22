@@ -1,0 +1,259 @@
+categories:
+- Leave Management
+- This contains conversation related to leave management
+conversations:
+- - I want a leave
+  - Please enter from date
+- - I want a PTO
+  - Please enter from date
+- - I want a time off
+  - Please enter from date
+- - I want a vacation
+  - Please enter from date
+
+- - I need a leave
+  - Please enter from date
+- - I need a PTO
+  - Please enter from date
+- - I need a time off
+  - Please enter from date
+- - I need a vacation
+  - Please enter from date
+
+- - I would like to apply leave
+  - Please enter from date
+- - I would like to apply for leave
+  - Please enter from date
+
+- - I want to apply leave
+  - Please enter from date
+- - I want to apply for leave
+  - Please enter from date
+
+- - Apply leave
+  - Please enter from date
+- - Apply for leave
+  - Please enter from date
+
+- - I want to take a PTO
+  - Please enter from date
+- - I want to take PTO
+  - Please enter from date
+
+- - I want to take time off
+  - Please enter from date
+
+- - I want to take a leave
+  - Please enter from date
+- - I want to take leave
+  - Please enter from date
+
+- - I want to go on a holiday
+  - Please enter from date
+- - I want to go for a holiday
+  - Please enter from date
+
+- - I want to go on a vacation
+  - Please enter from date
+- - I want to go for a vacation
+  - Please enter from date
+
+- - Leave management
+  - Please enter from date
+- - PTO
+  - Please enter from date
+- - Time off
+  - Please enter from date
+- - Vacation
+  - Please enter from date
+- - Holiday
+  - Please enter from date
+
+- - Help me apply for leave
+  - Please enter from date
+- - Help me apply leave
+  - Please enter from date
+- - Help me apply for vacation
+  - Please enter from date
+- - Help me apply for PTO
+  - Please enter from date
+- - Help me apply for time off
+  - Please enter from date
+
+- - Help me take leave
+  - Please enter from date
+- - Help me take time off
+  - Please enter from date
+- - Help me take PTO
+  - Please enter from date
+- - Help me take vacation
+  - Please enter from date
+
+- - Help me get leave
+  - Please enter from date
+- - Help me get vacation
+  - Please enter from date
+- - Help me get time off
+  - Please enter from date
+- - Help me get PTO
+  - Please enter from date
+
+- - Manage leave
+  - Please enter from date
+
+- - I need to apply for leave
+  - Please enter from date
+- - I need to apply for a leave
+  - Please enter from date
+- - I need to apply leave
+  - Please enter from date
+- - I need to apply a leave
+  - Please enter from date
+
+- - I need to apply for PTO
+  - Please enter from date
+- - I need to apply PTO
+  - Please enter from date
+- - I need to apply for a PTO
+  - Please enter from date
+- - I need to apply a PTO
+  - Please enter from date
+
+- - I need to apply for vacation
+  - Please enter from date
+- - I need to apply for a vacation
+  - Please enter from date
+
+- - I need to apply for off
+  - Please enter from date
+- - I need to apply for time off
+  - Please enter from date
+- - I need to apply for paid time off
+  - Please enter from date
+- - I need to apply for a off
+  - Please enter from date
+- - I need to apply for an off
+  - Please enter from date
+- - I need to apply for a paid time off
+  - Please enter from date
+- - I need to apply for a time off
+  - Please enter from date
+
+- - I need to apply off
+  - Please enter from date
+- - I need to apply time off
+  - Please enter from date
+- - I need to apply a off
+  - Please enter from date
+- - I need to apply paid time off
+  - Please enter from date
+- - I need to apply an off
+  - Please enter from date
+- - I need to apply a time off
+  - Please enter from date
+- - I need to apply a paid time off
+  - Please enter from date
+
+- - I want to go on a leave
+  - Please enter from date
+- - I need to go on a leave
+  - Please enter from date
+- - I want to take a leave
+  - Please enter from date
+- - I need to take a leave
+  - Please enter from date
+- - I would like to go on a leave
+  - Please enter from date
+- - Take a leave
+  - Please enter from date
+
+- - I want to go on leave
+  - Please enter from date
+- - I need to go on leave
+  - Please enter from date
+- - I want to take leave
+  - Please enter from date
+- - I need to take leave
+  - Please enter from date
+- - I would like to go on leave
+  - Please enter from date
+- - Take leave
+  - Please enter from date
+
+- - I want to go on a vacation
+  - Please enter from date
+- - I need to go on a vacation
+  - Please enter from date
+- - I want to take a vacation
+  - Please enter from date
+- - I need to take a vacation
+  - Please enter from date
+- - I would like to go on a vacation
+  - Please enter from date
+- - Take a vacation
+  - Please enter from date
+
+- - I want to go on vacation
+  - Please enter from date
+- - I need to go on vacation
+  - Please enter from date
+- - I want to take vacation
+  - Please enter from date
+- - I need to take vacation
+  - Please enter from date
+- - I would like to go on vacation
+  - Please enter from date
+- - Take vacation
+  - Please enter from date
+
+- - I want to go on a time off
+  - Please enter from date
+- - I need to go on a time off
+  - Please enter from date
+- - I want to take a time off
+  - Please enter from date
+- - I need to take a time off
+  - Please enter from date
+- - I would like to go on a time off
+  - Please enter from date
+- - Take a time off
+  - Please enter from date
+
+- - I want to go on time off
+  - Please enter from date
+- - I need to go on time off
+  - Please enter from date
+- - I want to take time off
+  - Please enter from date
+- - I need to take time off
+  - Please enter from date
+- - I would like to go on time off
+  - Please enter from date
+- - Take time off
+  - Please enter from date
+
+- - I want to go on a PTO
+  - Please enter from date
+- - I need to go on a PTO
+  - Please enter from date
+- - I want to take a PTO
+  - Please enter from date
+- - I need to take a PTO
+  - Please enter from date
+- - I would like to go on a PTO
+  - Please enter from date
+- - Take a PTO
+  - Please enter from date
+
+- - I want to go on PTO
+  - Please enter from date
+- - I need to go on PTO
+  - Please enter from date
+- - I want to take PTO
+  - Please enter from date
+- - I need to take PTO
+  - Please enter from date
+- - I would like to go on PTO
+  - Please enter from date
+- - Take PTO
+  - Please enter from date
