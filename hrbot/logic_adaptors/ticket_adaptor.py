@@ -1,12 +1,12 @@
-"""This module contains DynamicAdaptor that processes input
-statement and fetches information from the database.
+"""
+This module contains TicketAdaptor that processes input
+statement and raise the ticket on behalf of user.
 """
 from __future__ import unicode_literals
 from chatterbot.logic import LogicAdapter
 from chatterbot.conversation import Statement
 
 from ..global_variables import EMP_ID, OTHER_EMP_ID
-from ..models import Ticket
 from ..utils import createTicket
 
 ticket_flag = False
@@ -28,25 +28,6 @@ class TicketAdaptor(LogicAdapter):
                 'ticket', 'create a ticket', 'raise ticket',
                 'issue'
             ]
-        }
-
-        # Field names, keyword mapping
-        self.db_keyword_map = {
-            'employee id': 'emp_id',
-            'employee code': 'emp_id',
-            'designation': 'designation',
-            'first name': 'first_name',
-            'last name': 'last_name',
-            'email': 'email_id',
-            'email id': 'email_id',
-            'emailid': 'email_id',
-            'total leaves': 'total_leaves',
-            'applied leaves': 'applied_leaves',
-            'mobile number': 'mobile_no',
-            'joining date': 'joining_date',
-            'date of joining': 'joining_date',
-            'remaining leaves': 'remaining leaves',
-            'yet accrue': 'yet_to_accrue'
         }
 
     def can_process(self, statement):
