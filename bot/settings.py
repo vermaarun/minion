@@ -54,12 +54,11 @@ CHATTERBOT = {
     ],
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'training_data': [
-        # 'chatterbot.corpus.custom.hr'
         'hrbot.corpus.pramati',
         'hrbot.corpus.general',
         'hrbot.corpus.leave_management',
-        'hrbot.corpus.employee_search',
-        'hrbot.corpus.ticket_management'
+        # 'hrbot.corpus.employee_search',
+        # 'hrbot.corpus.ticket_management'
     ],
     'django_app_name': 'django_chatterbot'
 }

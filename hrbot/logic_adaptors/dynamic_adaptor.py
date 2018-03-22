@@ -6,10 +6,10 @@ from chatterbot.logic import LogicAdapter
 from django.db.models import Q
 from chatterbot.conversation import Statement
 from ..models import Employee, Leave
-from ..global_variables import EMP_ID, OTHER_EMP_ID
-from ..utils import apply_leave, validate_id
+from ..global_variables import EMP_ID
+from ..utils import apply_leave
 
-
+SEARCH_FLAG = False
 class DynamicAdaptor(LogicAdapter):
     """The DynamicAdaptor logic adaptor parses input to
     extract the keywords related to employee's information.
@@ -29,24 +29,18 @@ class DynamicAdaptor(LogicAdapter):
             'Leave': [
                 'total leaves', 'applied leaves', 'remaining leaves',
                 'yet accrue'
+            ],
+            'search': [
+                'find employee', 'search employee', 'employee details',
+                'employee detail', 'employee information', 'employee info'
             ]
         }
 
         # Field names, keyword mapping
         self.db_keyword_map = {
-            # 'employee id': 'emp_id',
-            # 'employee code': 'emp_id',
-            # 'designation': 'designation',
-            # 'first name': 'first_name',
-            # 'last name': 'last_name',
-            # 'email': 'email_id',
-            # 'email id': 'email_id',
-            # 'emailid': 'email_id',
             'total leaves': 'total_leaves',
             'applied leaves': 'applied_leaves',
             'mobile number': 'mobile_no',
-            # 'joining date': 'joining_date',
-            # 'date of joining': 'joining_date',
             'remaining leaves': 'remaining leaves',
             'yet accrue': 'yet_to_accrue'
         }
@@ -55,14 +49,6 @@ class DynamicAdaptor(LogicAdapter):
         """Checks whether the statement can be processed or not."""
 
         print('______Inside Can Process______')
-        # input_text = str(statement.text).lower()
-        #
-        # if parse(input_text):
-        #     return True
-        # elif validate_text(input_text.split(), self.module_keywords):
-        #     return True
-        # else:
-        #     return False
         return True
 
     def process(self, statement):
@@ -71,6 +57,7 @@ class DynamicAdaptor(LogicAdapter):
         """
 
         print('______Inside Process______')
+        global SEARCH_FLAG
         input_text = str(statement.text).lower().rstrip('?.')
         text_list = input_text.split()
         response = Statement(text=input_text)
@@ -78,27 +65,7 @@ class DynamicAdaptor(LogicAdapter):
                          "employee or you wish to switch to your own " \
                          "employee id, please type the employee id. " \
                          "Please ignore in case you are using your id."
-        emp_id = EMP_ID['emp_id']
 
-        # if 'emp_id' in OTHER_EMP_ID:
-        #     emp_id = OTHER_EMP_ID['emp_id']
-
-        # if validate_id(input_text):
-        #     value = int(input_text)
-            # if value == EMP_ID['emp_id']:
-            #     if 'emp_id' in OTHER_EMP_ID:
-            #         del OTHER_EMP_ID['emp_id']
-            #
-            #     response.text = "Employee id switched. Please tell me what" \
-            #                     " you wish to know."
-            #     response.confidence = 1
-            # else:
-            #     emp_id = OTHER_EMP_ID['emp_id'] = value
-            #     response.text = "Employee id switched. Please tell me what" \
-            #                     " you wish to know."
-            #     response.confidence = 1
-
-        # else:
         for key, val in self.module_keywords.items():
             status = []
             text_keyword = None
@@ -116,21 +83,15 @@ class DynamicAdaptor(LogicAdapter):
                     status = []
 
             if status:
-                # field = self.db_keyword_map[text_keyword]
                 if key == 'Employee':
-                    # data = list(Employee.objects.filter(
-                    #     emp_id=emp_id).values())
+
                     response.text = "I am sorry I don't understand. " \
                                     "Please enter the name to know details."
-                    # response.text += str(data[0][field]).title()
-                    # response.text += ".<br> %s" % reset_response
                     response.confidence = 1
-                #
-                # elif key == 'Leave' and 'emp_id' in OTHER_EMP_ID:
-                #     response.text = 'Sorry! Leave data of other ' \
-                #                     'employees is confidential. %s' % \
-                #                     reset_response
-                #     response.confidence = 1
+                elif key == 'search':
+                    SEARCH_FLAG = True
+                    response.text = "Please enter employee name"
+                    response.confidence = 1
 
                 elif key == 'Leave':
                     data = list(
@@ -151,28 +112,32 @@ class DynamicAdaptor(LogicAdapter):
                 break
 
         if response.confidence == 0:
-            qset = Q(full_name__icontains="".join(text_list))
-            emp_obj = list(Employee.objects.filter(qset).values())
-            if emp_obj:
-                if len(emp_obj) > 1:
+            if SEARCH_FLAG:
+                qset = Q(full_name__icontains=text_list[0])
+                emp_obj = list(Employee.objects.filter(qset).values())
+                if emp_obj:
                     result = "Please find the matching results below:<br>"
                     for emp in emp_obj:
-                        result += "Name: %s %s <br>" %(
-                            emp['first_name'].title(),
-                            emp['last_name'].title())
-                    result += "Enter the name to know details."
+                        if "".join(text_list).lower() == \
+                                emp['full_name'].replace(' ','').lower():
+                            result = "Please find the details below:<br>"
+                            result += "Name: %s<br>Designation: %s<br>" \
+                                      "Employee Id: %s<br>" \
+                                      "Mobile No.: %s<br>Email Id: %s" % (
+                                emp['full_name'].title(),
+                                emp['designation'].title(),
+                                emp['emp_id'], emp['mobile_no'],
+                                emp['email_id'])
+                            SEARCH_FLAG = False
+                            break
+                        else:
+                            result += "Name: %s<br>" % (
+                                emp['full_name'].title())
+
                 else:
-                    result = "Please find the details below:<br>"
-                    for emp in emp_obj:
-                        # print(emp)
-                        result += "Name: %s %s <br>Designation: %s<br>" \
-                                  "Employee Id: %s<br>" \
-                                  "Mobile No.: %s<br>Email Id: %s" %(
-                            emp['first_name'].title(),
-                            emp['last_name'].title(),
-                            emp['designation'].title(),
-                            emp['emp_id'], emp['mobile_no'],
-                            emp['email_id'])
+                    result = "I am sorry! I am not able to find the employee" \
+                             " you are looking for"
+                    SEARCH_FLAG = False
             else:
                 result = apply_leave(statement)
             if result:
