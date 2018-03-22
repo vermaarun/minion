@@ -93,6 +93,8 @@ TEMPLATES = [
     },
 ]
 
+TEMPLATE_DIRS = (os.path.join(BASE_DIR, 'hrbot', 'templates'),)
+
 WSGI_APPLICATION = 'bot.wsgi.application'
 
 

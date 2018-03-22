@@ -2,10 +2,15 @@
 
 from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.shortcuts import render
 from rest_framework import viewsets
 
 from .serializers import TicketSerializer
 from .models import Ticket
+
+
+def render_faq(request):
+    return render(request, 'faq.html', {})
 
 
 class ChatterBotAppView(LoginRequiredMixin, TemplateView):

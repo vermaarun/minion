@@ -56,7 +56,7 @@
 {% endblock %}
 
 {% block sidebar %}
-    <div style="height:100%; width:15%; background-color:rgba(0,0,0,.15);
+    <div style="height:100%; width:15%; background-color:#868e96;
         position:fixed; margin-top:5.1%;">
         <nav class="mt-5" aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
@@ -86,14 +86,38 @@
             <!--</div>-->
         <!--</div>-->
         <!--<br/>-->
+
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Direct Message</a></li>
+                <li class="breadcrumb-item dropdown">
+                    <a class="dropdown-toggle" href="#" role="button"
+                       data-toggle="dropdown" aria-haspopup="true"
+                       aria-expanded="false" id="menu-side">Bots</a>
+                    <div class="dropdown-menu no-transition"
+                         aria-labelledby="menu-side">
+                        <a class="dropdown-item" href="#">HR Bot</a>
+                        <a class="dropdown-item" href="#">Snack Bot</a>
+                        <a class="dropdown-item" href="#">Meeting Bot</a>
+                        <a class="dropdown-item" href="#">Event Bot</a>
+                    </div>
+                </li>
+            </ol>
+        </nav>
+
+        <!--<nav aria-label="breadcrumb" role="navigation">-->
+            <!--<ol class="breadcrumb">-->
+                <!--<li class="breadcrumb-item"><a href="#">Bots</a></li>-->
+            <!--</ol>-->
+        <!--</nav>-->
+        <nav aria-label="breadcrumb" role="navigation">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#">Chat History</a></li>
             </ol>
         </nav>
         <nav aria-label="breadcrumb" role="navigation">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="#">Chat History</a></li>
+                <li class="breadcrumb-item"><a href="{% url 'faq' %}">FAQ</a>
+                </li>
             </ol>
         </nav>
     </div>
