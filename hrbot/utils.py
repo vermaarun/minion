@@ -1,8 +1,9 @@
 """The module contains utility methods"""
-import smtplib
+
+from dateparser import parse
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
-from dateparser import parse
+import smtplib
 
 from .models import Employee, LeaveData, EmployeeProfile, Ticket
 from .global_variables import EMP_ID, LEAVE_DATE, TICKET_DATA, TICKET_TYPE, \
@@ -10,14 +11,13 @@ from .global_variables import EMP_ID, LEAVE_DATE, TICKET_DATA, TICKET_TYPE, \
 
 
 def apply_leave(statement):
-    """Checks whether the input statement is a date or not.
+    """
+    Checks whether the input statement is a date or not.
     If so, adds date to the global variable.
     """
     input_text = str(statement.text).lower()
     date_obj = parse(input_text, settings={'STRICT_PARSING': True})
     content = {}
-    # print(date_obj)
-    # print(LEAVE_DATE)
 
     if date_obj:
         if 'from_date' not in LEAVE_DATE:
@@ -45,7 +45,6 @@ def apply_leave(statement):
             content['to_date'] = LEAVE_DATE['to_date']
             content['full_name'] = '%s %s' % (emp_data.first_name,
                                               emp_data.last_name)
-
             send_mail([emp_data.email_id], content)
             del LEAVE_DATE['from_date']
             del LEAVE_DATE['to_date']
@@ -60,14 +59,9 @@ def validate_id(text):
 
     if text.isdigit():
         obj = EmployeeProfile.objects.get(emp_id=int(text))
-        # if obj:
-        #     result = True
-        # else:
-        #     result = False
         result = bool(obj)
     else:
         result = False
-
     return result
 
 
@@ -77,7 +71,6 @@ def send_mail(receivers, content):
     sender = 'akshat.goel@imaginea.com'
     duration = (content['to_date'] - content['from_date']).days
     duration += 1
-    # receivers = to
     gmail_user = "akshat.goel@imaginea.com"
     gmail_pwd = ""
 
@@ -130,7 +123,6 @@ def createTicket(statement):
     :param statement:
     :return:
     """
-    print("IN CREATE TICKET>>>>>>>>>>>>>>>>>>>", statement)
     response = ''
     ticket_type = TICKET_DATA.get('type', None)
     ticket_to = TICKET_DATA.get('to', None)
@@ -176,7 +168,7 @@ def createTicket(statement):
         else:
             return "Please select a valid option"
         return response
-    # sendMailToUser()
+
     if not response:
         response = statement
     return response
@@ -189,7 +181,6 @@ def createTicketWithGivenData(TICKET_DATA):
     :return:
     """
     try:
-        print("IN CREATE FUNCTION")
         ticket_data = Ticket(
             emp=Employee.objects.get(emp_id=EMP_ID['emp_id']),
             type=TICKET_DATA.get('type', None),
@@ -199,7 +190,7 @@ def createTicketWithGivenData(TICKET_DATA):
             priority=TICKET_DATA.get('priority', None)
         )
         ticket_data.save()
-        sendMailToUser(ticket_data.emp.email_id, TICKET_DATA)
+        sendMailToUser(ticket_data.emp.email_id)
         response = "Ticket created successfully."
     except Exception as e:
         print("***ERROR in creating Ticket", e)
@@ -207,12 +198,11 @@ def createTicketWithGivenData(TICKET_DATA):
     return response
 
 
-def sendMailToUser(receivers, data):
+def sendMailToUser(receivers):
     """ Method to send email to user after ticket creation. """
     sender = 'akshat.goel@imaginea.com'
-    # receivers = to
     mail_user = "akshat.goel@imaginea.com"
-    mail_pwd = "Look4thebest!"
+    mail_pwd = "********"
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = "Ticket Raised: %s" % TICKET_DATA['subject']
