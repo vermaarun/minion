@@ -26,13 +26,6 @@ conversations:
 - - Search for an employee
   - Please enter employee name
 
-- - Who is this person
-  - Please enter employee name
-- - Who is this employee
-  - Please enter employee name
-- - Who is
-  - Please enter employee name
-
 - - Can you search for an employee
   - Please enter employee name
 - - Can you search for employee
@@ -69,16 +62,8 @@ conversations:
 
 - - Employee detail
   - Please enter employee name
-- - Emp detail
-  - Please enter employee name
-- - Detail
-  - Please enter employee name
 
 - - Employee details
-  - Please enter employee name
-- - Emp details
-  - Please enter employee name
-- - Details
   - Please enter employee name
 
 - - Help me find the employee details
@@ -99,7 +84,5 @@ conversations:
 
 - - Employee info
   - Please enter employee name
-- - Emp info
-  - Please enter employee name
-- - Info
+- - Employee information
   - Please enter employee name
