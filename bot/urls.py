@@ -15,12 +15,16 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include,path
-# from ..hrbot import urls as bot_urls
+
+from hrbot.views import bot_login, login_proc, bot_logout
 # from django.conf.urls import include
 admin.site.site_url = '/api/'
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include('hrbot.urls')),
+    path('login/', bot_login, name='minion_login'),
+    path('login/proc/', login_proc),
+    path('logout/', bot_logout, name='minion_logout'),
     # path('', include('hrbot.urls')),
 ]

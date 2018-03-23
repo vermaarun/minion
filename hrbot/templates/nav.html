@@ -18,13 +18,13 @@
         <div class="navbar-nav">
             <a class="nav-item nav-link active" href="{% url 'main' %}">Home
             <span class="sr-only">(current)</span></a>
-            <a class="nav-item nav-link" href="{% url 'admin:index' %}">
-                Admin</a>
-            <a class="nav-item nav-link" href="{% url 'admin:logout' %}">
+            <!--<a class="nav-item nav-link" href="{% url 'admin:index' %}">-->
+                <!--Admin</a>-->
+            <a class="nav-item nav-link" href="{% url 'minion_logout' %}">
                 Logout
             </a>
-            <a class="nav-item nav-link"
-               href="{% url 'admin:password_change' %}"> Change Password</a>
+            <!--<a class="nav-item nav-link"-->
+               <!--href="{% url 'admin:password_change' %}"> Change Password</a>-->
         </div>
     </div>
 </nav>
@@ -41,9 +41,9 @@
                        aria-expanded="false" id="menu-side">My Profile</a>
                     <div class="dropdown-menu no-transition"
                          aria-labelledby="menu-side">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
+                        <a class="dropdown-item" href="#">Profile</a>
+                        <a class="dropdown-item" href="#">Change Password</a>
+                        <a class="dropdown-item" href="#">Settings</a>
                     </div>
                 </li>
             </ol>
