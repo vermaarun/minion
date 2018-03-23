@@ -140,11 +140,11 @@ class Ticket(models.Model):
     )
 
     emp = models.ForeignKey(Employee, on_delete=models.CASCADE, null=True)
-    type = models.CharField(max_length=10, choices=type_choice)
-    to = models.CharField(max_length=10, choices=to_choice)
+    type = models.CharField(max_length=30, choices=type_choice)
+    to = models.CharField(max_length=30, choices=to_choice)
     subject = models.CharField(max_length=100)
     description = models.TextField(max_length=100)
-    priority = models.CharField(max_length=10, choices=priority_choice)
+    priority = models.CharField(max_length=30, choices=priority_choice)
 
     def __str__(self):
         """ Method to print Ticket object. """
