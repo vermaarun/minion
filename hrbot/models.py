@@ -14,7 +14,7 @@ class Employee(models.Model):
     last_name = models.CharField(max_length=200, default='', blank=True)
     full_name = models.CharField(max_length=200, default='', blank=True)
     designation = models.CharField(max_length=200, default='', blank=True)
-    mobile_no = models.IntegerField(default=0)
+    mobile_no = models.CharField(max_length=30, default=0)
     email_id = models.EmailField(default='', blank=False)
     joining_date = models.DateField()
     creation_time = models.DateTimeField()
