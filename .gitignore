@@ -1,7 +1,6 @@
 lib
 bin
 include
-migrations/
 bot/hrbot/serializers.py
 *.pyc
 db.sqlite3

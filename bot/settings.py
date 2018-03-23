@@ -28,7 +28,7 @@ SECRET_KEY = '9@8bhgp822lxoichrw53@hd%lh*(&ovc55p-7%e9l^v-^(_@@+'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 # connect('test')
 # Application definition
@@ -102,7 +102,7 @@ WSGI_APPLICATION = 'bot.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'miniondb',
+        'NAME': 'minionnew_db',
         'USER': 'minionbot',
         'PASSWORD': 'pramati123',
         'HOST': 'localhost',
