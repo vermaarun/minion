@@ -68,11 +68,11 @@ def validate_id(text):
 def send_mail(receivers, content):
     """The function is used to send email."""
 
-    sender = 'akshat.goel@imaginea.com'
+    sender = 'minion.noreply@gmail.com'
     duration = (content['to_date'] - content['from_date']).days
     duration += 1
-    gmail_user = "akshat.goel@imaginea.com"
-    gmail_pwd = ""
+    gmail_user = "minion.noreply@gmail.com"
+    gmail_pwd = "minionnoreply@123"
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = "Leave Application: From %s To %s %s " \
@@ -203,14 +203,14 @@ def createTicketWithGivenData(TICKET_DATA):
 
 def sendMailToUser(receivers):
     """ Method to send email to user after ticket creation. """
-    sender = 'akshat.goel@imaginea.com'
-    mail_user = "akshat.goel@imaginea.com"
-    mail_pwd = "********"
+    sender = 'minion.noreply@gmail.com'
+    mail_user = "minion.noreply@gmail.com"
+    mail_pwd = "minionnoreply@123"
 
     msg = MIMEMultipart('alternative')
     msg['Subject'] = "Ticket Raised: %s" % TICKET_DATA['subject']
     msg['From'] = sender
-    msg['To'] = receivers[0]
+    msg['To'] = receivers
 
     body = """
             <html>

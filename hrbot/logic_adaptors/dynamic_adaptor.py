@@ -85,6 +85,7 @@ class DynamicAdaptor(LogicAdapter):
                     status = []
 
             if status:
+                field = self.db_keyword_map.get(text_keyword, None)
                 if key == 'Employee':
 
                     response.text = "I am sorry I don't understand. " \
