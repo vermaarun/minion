@@ -6,10 +6,9 @@ from __future__ import unicode_literals
 from chatterbot.logic import LogicAdapter
 from chatterbot.conversation import Statement
 
-from ..global_variables import EMP_ID, OTHER_EMP_ID
+from ..global_variables import EMP_ID, OTHER_EMP_ID, TICKET_DATA
 from ..utils import createTicket
-
-ticket_flag = False
+from ..models import Employee
 
 
 class TicketAdaptor(LogicAdapter):
@@ -38,7 +37,6 @@ class TicketAdaptor(LogicAdapter):
         """Processes the input statement and respond back with
         appropriate response.
         """
-        global ticket_flag
         result = ''
         input_text = str(statement.text).lower().rstrip('?.')
         text_list = input_text.split()
@@ -48,6 +46,8 @@ class TicketAdaptor(LogicAdapter):
                          "employee id, please type the employee id. " \
                          "Please ignore in case you are using your id."
         emp_id = EMP_ID.get('emp_id', None)
+        empObj = Employee.objects.filter(emp_id=emp_id)[0]
+        current_ticket_flag = empObj.ticket_flag
 
         for key, val in self.module_keywords.items():
             status = []
@@ -65,24 +65,28 @@ class TicketAdaptor(LogicAdapter):
                 else:
                     status = []
 
-            if statement.text.upper() == 'CANCEL' and ticket_flag:
-                ticket_flag = False
+            if statement.text.upper() == 'CANCEL' and current_ticket_flag:
+                empObj.ticket_flag = False
+                empObj.save()
                 response.confidence = 1
                 response.text = 'Operation aborted !'
+                TICKET_DATA.clear()
                 return response
 
-            if status and not ticket_flag:
+            if status and not current_ticket_flag:
                 response.confidence = 1
                 result = "Please select type of ticket you want to create " \
                          "1) Default 2) Incident 3) Problem 4) Request for" \
                          " Change or 'cancel' to exit the operation."
-                ticket_flag = True
+                empObj.ticket_flag = True
+                empObj.save()
             else:
-                if ticket_flag:
+                if current_ticket_flag:
                     result = createTicket(statement.text)
                     response.confidence = 1
                     if result == "Ticket created successfully.":
-                        ticket_flag = False
+                        empObj.ticket_flag = False
+                        empObj.save()
                 else:
                     response.confidence = 0
 
