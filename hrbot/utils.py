@@ -6,7 +6,7 @@ from email.mime.text import MIMEText
 import smtplib
 
 from .models import Employee, LeaveData, EmployeeProfile, Ticket
-from .global_variables import EMP_ID, LEAVE_DATE, TICKET_DATA, TICKET_TYPE, \
+from .global_variables import EMP_ID, LEAVE_DATE, TICKET_TYPE, \
     TICKET_TO, TICKET_PRIORITY
 
 
@@ -117,22 +117,19 @@ def send_mail(receivers, content):
         print("Error: unable to send email: %s " % err)
 
 
-def createTicket(statement):
+def createTicket(statement, ticket_data):
     """
     Create Ticket for the user
     :param statement:
+    :param ticket_data:
     :return:
     """
     response = ''
-    ticket_type = TICKET_DATA.get('type', None)
-    ticket_to = TICKET_DATA.get('to', None)
-    ticket_priority = TICKET_DATA.get('priority', None)
-    ticket_subject = TICKET_DATA.get('subject', None)
-    ticket_description = TICKET_DATA.get('description', None)
 
+    ticket_type = ticket_data.ticket_type
     if ticket_type is None:
         if statement.upper() in TICKET_TYPE:
-            TICKET_DATA['type'] = statement
+            ticket_data.ticket_type = statement
         else:
             return "Please select a valid type from the given options or " \
                    "type 'cancel' to exit operation."
@@ -143,33 +140,40 @@ def createTicket(statement):
         """
         return response
 
+    ticket_to = ticket_data.ticket_to
     if ticket_to is None:
         if statement.upper() in TICKET_TO:
-            TICKET_DATA['to'] = statement
+            ticket_data.ticket_to = statement
         else:
-            return "Please select a valid option"
+            return "Please select a valid option from the given options or " \
+                   "type 'cancel' to exit operation."
         response = "Please provide subject of the Ticket."
         return response
 
+    ticket_subject = ticket_data.ticket_subject
     if ticket_subject is None:
-        TICKET_DATA['subject'] = statement
+        ticket_data.ticket_subject = statement
         response = "Enter Description of the Ticket"
         return response
 
+    ticket_description = ticket_data.ticket_description
     if ticket_description is None:
-        TICKET_DATA['description'] = statement
+        ticket_data.ticket_description = statement
         response = "Please select priority of the Ticket 1) Low, 2) Normal, " \
                    "3) Medium, 4) High, 5) Very High or 'cancel' " \
                    "to exit the operation."
         return response
 
+    ticket_priority = ticket_data.ticket_priority
     if ticket_priority is None:
         if statement.upper() in TICKET_PRIORITY:
-            TICKET_DATA['priority'] = statement
-            response = createTicketWithGivenData(TICKET_DATA)
-            TICKET_DATA.clear()
+            ticket_data.ticket_priority = statement
+
+            response = createTicketWithGivenData(ticket_data)
+            ticket_data.clear()
         else:
-            return "Please select a valid option"
+            return "Please select a valid option from the given options or " \
+                   "type 'cancel' to exit operation."
         return response
 
     if not response:
@@ -177,23 +181,23 @@ def createTicket(statement):
     return response
 
 
-def createTicketWithGivenData(TICKET_DATA):
+def createTicketWithGivenData(ticket_data):
     """
     Create ticket with the entered data by user.
-    :param TICKET_DATA:
+    :param ticket_data:
     :return:
     """
     try:
-        ticket_data = Ticket(
+        ticketDataObj = Ticket(
             emp=Employee.objects.get(emp_id=EMP_ID['emp_id']),
-            type=TICKET_DATA.get('type', None),
-            to=TICKET_DATA.get('to', None),
-            subject=TICKET_DATA.get('subject', None),
-            description=TICKET_DATA.get('description', None),
-            priority=TICKET_DATA.get('priority', None)
+            type=ticket_data.ticket_type,
+            to=ticket_data.ticket_to,
+            subject=ticket_data.ticket_subject,
+            description=ticket_data.ticket_description,
+            priority=ticket_data.ticket_priority
         )
-        ticket_data.save()
-        sendMailToUser(ticket_data.emp.email_id)
+        ticketDataObj.save()
+        sendMailToUser(ticketDataObj.emp.email_id, ticket_data)
         response = "Ticket created successfully."
     except Exception as e:
         print("***ERROR in creating Ticket", e)
@@ -201,14 +205,14 @@ def createTicketWithGivenData(TICKET_DATA):
     return response
 
 
-def sendMailToUser(receivers):
+def sendMailToUser(receivers, ticket_data):
     """ Method to send email to user after ticket creation. """
     sender = 'minion.noreply@gmail.com'
     mail_user = "minion.noreply@gmail.com"
     mail_pwd = "minionnoreply@123"
 
     msg = MIMEMultipart('alternative')
-    msg['Subject'] = "Ticket Raised: %s" % TICKET_DATA['subject']
+    msg['Subject'] = "Ticket Raised: %s" % ticket_data.ticket_subject
     msg['From'] = sender
     msg['To'] = receivers
 
@@ -227,9 +231,10 @@ def sendMailToUser(receivers):
                     Minion..!!
                     </p>
                 </body>
-            </html>""" % (TICKET_DATA['type'], TICKET_DATA['to'],
-                          TICKET_DATA['subject'], TICKET_DATA['description'],
-                          TICKET_DATA['priority']
+            </html>""" % (ticket_data.ticket_type, ticket_data.ticket_to,
+                          ticket_data.ticket_subject,
+                          ticket_data.ticket_description,
+                          ticket_data.ticket_priority
                           )
     msg.attach(MIMEText(body, 'html'))
 

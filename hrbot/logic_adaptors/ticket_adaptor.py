@@ -6,9 +6,26 @@ from __future__ import unicode_literals
 from chatterbot.logic import LogicAdapter
 from chatterbot.conversation import Statement
 
-from ..global_variables import EMP_ID, OTHER_EMP_ID, TICKET_DATA
+from ..global_variables import EMP_ID, OTHER_EMP_ID
 from ..utils import createTicket
 from ..models import Employee
+
+
+class TicketData(object):
+
+    def __init__(self):
+        self.ticket_type = None
+        self.ticket_to = None
+        self.ticket_subject = None
+        self.ticket_description = None
+        self.ticket_priority = None
+
+    def clear(self):
+        self.ticket_type = None
+        self.ticket_to = None
+        self.ticket_subject = None
+        self.ticket_description = None
+        self.ticket_priority = None
 
 
 class TicketAdaptor(LogicAdapter):
@@ -28,6 +45,7 @@ class TicketAdaptor(LogicAdapter):
                 'issue'
             ]
         }
+        self.ticketDataObj = TicketData()
 
     def can_process(self, statement):
         """Checks whether the statement can be processed or not."""
@@ -70,7 +88,7 @@ class TicketAdaptor(LogicAdapter):
                 empObj.save()
                 response.confidence = 1
                 response.text = 'Operation aborted !'
-                TICKET_DATA.clear()
+                self.ticketDataObj.clear()
                 return response
 
             if status and not current_ticket_flag:
@@ -82,7 +100,8 @@ class TicketAdaptor(LogicAdapter):
                 empObj.save()
             else:
                 if current_ticket_flag:
-                    result = createTicket(statement.text)
+                    result = createTicket(statement.text,
+                                          self.ticketDataObj)
                     response.confidence = 1
                     if result == "Ticket created successfully.":
                         empObj.ticket_flag = False
