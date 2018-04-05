@@ -14,7 +14,6 @@ from ..models import Employee
 class TicketData(object):
 
     def __init__(self):
-        print("INITIALIZING TICKET DATA>>>>>>>>>>>>")
         self.ticket_type = None
         self.ticket_to = None
         self.ticket_subject = None
@@ -22,7 +21,6 @@ class TicketData(object):
         self.ticket_priority = None
 
     def clear(self):
-        print("CLEAR TICKET DATA>>>>>>>>>>>>>")
         self.ticket_type = None
         self.ticket_to = None
         self.ticket_subject = None
@@ -38,7 +36,6 @@ class TicketAdaptor(LogicAdapter):
     """
 
     def __init__(self, **kwargs):
-        print("INITIALIZING TICKET ADAPTER>>>>>>>>>>>>")
         super(TicketAdaptor, self).__init__(**kwargs)
 
         # Keywords that user can input

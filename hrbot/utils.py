@@ -125,11 +125,7 @@ def createTicket(statement, ticket_data):
     :return:
     """
     response = ''
-    print("CREATE TICKET DATA>>>>>>>>>>>>>>>>>>>.", ticket_data.ticket_type)
-    print("CREATE TICKET DATA>>>>>>>>>>>>>>>>>>>.", ticket_data.ticket_to)
-    print("CREATE TICKET DATA>>>>>>>>>>>>>>>>>>>.", ticket_data.ticket_subject)
-    print("CREATE TICKET DATA>>>>>>>>>>>>>>>.", ticket_data.ticket_description)
-    print("CREATE TICKET DATA>>>>>>>>>>>>>>>>>.", ticket_data.ticket_priority)
+
     ticket_type = ticket_data.ticket_type
     if ticket_type is None:
         if statement.upper() in TICKET_TYPE:
